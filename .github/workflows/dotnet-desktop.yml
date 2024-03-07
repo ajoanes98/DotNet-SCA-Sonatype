@@ -80,10 +80,11 @@ jobs:
       with:
         java-version: 1.8
         
-    # - name: Create CycloneDX SBOM (transitive mapping)
-    #   run: |
-    #      dotnet tool install CycloneDX
-    # dotnet CycloneDX $env:SBOM_Path -o $env:SBOM_Path
+    - name: Create CycloneDX SBOM (transitive mapping)
+      run: |
+         dotnet tool install CycloneDX
+         echo $env:SBOM_Path
+         dotnet CycloneDX SonatypeSCA\ -o SonatypeSCA\
 
     - name: Download and Run Sonatype IQ
       run: |
