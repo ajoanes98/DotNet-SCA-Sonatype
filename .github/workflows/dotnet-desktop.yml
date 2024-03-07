@@ -60,7 +60,8 @@ jobs:
       #Test_Project_Path: your-test-project-path                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
       #Wap_Project_Directory: your-wap-project-directory-name    # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
       #Wap_Project_Path: your-wap-project-path                   # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
-
+      SBOM_Path: SonatypeSCA
+      
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -83,13 +84,6 @@ jobs:
     #   env:
     #     Configuration: ${{ matrix.configuration }}
 
-    # Decode the base 64 encoded pfx and save the Signing_Certificate
-    # - name: Decode the pfx
-    #   run: |
-    #     $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Pfx }}")
-    #     $certificatePath = Join-Path -Path $env:Wap_Project_Directory -ChildPath GitHubActionsWorkflow.pfx
-    #     [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
-
     # Create the app package by building and packaging the Windows Application Packaging project
     # - name: Create the app package
     #   run: msbuild $env:Wap_Project_Path /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
@@ -99,29 +93,15 @@ jobs:
     #     Appx_Package_Build_Mode: StoreUpload
     #     Configuration: ${{ matrix.configuration }}
 
-    # Remove the pfx
-    # - name: Remove the pfx
-    #   run: Remove-Item -path $env:Wap_Project_Directory\GitHubActionsWorkflow.pfx
-
-    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
-    # - name: Upload build artifacts
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: MSIX Package
-    #     path: ${{ env.Wap_Project_Directory }}\AppPackages      
-
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Nexus IQ Policy Evaluation
-      uses: sonatype-nexus-community/iq-github-action@1.1.1
-      with:
-        serverUrl: https://iq.aplattel.ngrok.io/
-        username: admin
-        password: admin!23
-        applicationId: NET-SCA
-        stage: release
-        target: ./*
+        
+    - name: Bump Package
+      run: |
+         dotnet tool install CycloneDX
+         dotnet CycloneDX $env:SBOM_Path -o $env:SBOM_Path
+
   
     
