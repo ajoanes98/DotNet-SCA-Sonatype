@@ -1,4 +1,8 @@
 # .NET Sonatype SCA Results 
 
 
-Note: bom.xml maps transitive dependencies. This was created with: https://www.nuget.org/packages/CycloneDX/
+Note: bom.xml maps transitive dependencies. 
+
+### Resources
+- https://www.nuget.org/packages/CycloneDX/
+- https://github.com/CycloneDX/cyclonedx-dotnet
