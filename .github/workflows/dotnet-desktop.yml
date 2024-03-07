@@ -90,6 +90,7 @@ jobs:
 
     - name: Download and Run Sonatype IQ
       run: |
-         wget https://download.sonatype.com/clm/scanner/latest.jar -UseBasicParsing -OutFile Sonatype-CLI.jar
+         echo Sonatype-CLI.jar - https://download.sonatype.com/clm/scanner/latest.jar 
+         curl --location 'https://download.sonatype.com/clm/scanner/latest.jar' > Sonatype-CLI.jar
          dir
     
