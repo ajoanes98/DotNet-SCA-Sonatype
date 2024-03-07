@@ -82,7 +82,7 @@ jobs:
         
     - name: Create CycloneDX SBOM (transitive mapping)
       run: |
-         dotnet tool install CycloneDX
+         dotnet tool install --global CycloneDX
          echo $env:SBOM_Path
          dotnet CycloneDX SonatypeSCA\ -o SonatypeSCA\
 
