@@ -69,39 +69,27 @@ jobs:
         fetch-depth: 0
 
     # Install the .NET Core workload
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 3.1.x
+    # - name: Install .NET Core
+    #   uses: actions/setup-dotnet@v3
+    #   with:
+    #     dotnet-version: 3.1.x
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
+    # - name: Setup MSBuild.exe
+    #   uses: microsoft/setup-msbuild@v1.0.2
 
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
-    # - name: Restore the application
-    #   run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
-    #   env:
-    #     Configuration: ${{ matrix.configuration }}
-
-    # Create the app package by building and packaging the Windows Application Packaging project
-    # - name: Create the app package
-    #   run: msbuild $env:Wap_Project_Path /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
-    #   env:
-    #     Appx_Bundle: Always
-    #     Appx_Bundle_Platforms: x86|x64
-    #     Appx_Package_Build_Mode: StoreUpload
-    #     Configuration: ${{ matrix.configuration }}
-
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
+    # - name: Set up JDK 1.8
+    #   uses: actions/setup-java@v1
+    #   with:
+    #     java-version: 1.8
         
-    - name: Bump Package
-      run: |
-         dotnet tool install CycloneDX
-         dotnet CycloneDX $env:SBOM_Path -o $env:SBOM_Path
+    # - name: Create CycloneDX SBOM (transitive mapping)
+    #   run: |
+    #      dotnet tool install CycloneDX
+    # dotnet CycloneDX $env:SBOM_Path -o $env:SBOM_Path
 
-  
+    - name: Download and Run Sonatype IQ
+      run: |
+         wget https://download.sonatype.com/clm/scanner/latest.jar -UseBasicParsing -OutFile Sonatype-CLI.jar
+         dir
     
