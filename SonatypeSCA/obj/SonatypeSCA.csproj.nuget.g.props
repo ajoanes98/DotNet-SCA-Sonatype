@@ -17,7 +17,8 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgUmbracoCms_Core Condition=" '$(PkgUmbracoCms_Core)' == '' ">C:\Users\AlexanderPlattel\.nuget\packages\umbracocms.core\7.15.11</PkgUmbracoCms_Core>
+    <PkgWinSCP Condition=" '$(PkgWinSCP)' == '' ">C:\Users\AlexanderPlattel\.nuget\packages\winscp\5.17.8</PkgWinSCP>
     <PkgJMeter Condition=" '$(PkgJMeter)' == '' ">C:\Users\AlexanderPlattel\.nuget\packages\jmeter\5.4.1</PkgJMeter>
+    <Pkg7-Zip_x64 Condition=" '$(Pkg7-Zip_x64)' == '' ">C:\Users\AlexanderPlattel\.nuget\packages\7-zip.x64\16.2.1</Pkg7-Zip_x64>
   </PropertyGroup>
 </Project>
