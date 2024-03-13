@@ -84,7 +84,7 @@ jobs:
       run: |
          dotnet tool install --global CycloneDX
          echo $env:SBOM_Path
-         dotnet CycloneDX SonatypeSCA\/SonatypeSCA.csproj -o SonatypeSCA\
+         dotnet CycloneDX SonatypeSCA\SonatypeSCA.csproj -o SonatypeSCA\
 
     - name: Download and Run Sonatype IQ
       run: |
