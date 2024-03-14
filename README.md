@@ -9,6 +9,9 @@ Note: bom.xml maps transitive dependencies.
 
 
 
+CycloneDX Steps:
+```
 dotnet restore
 dotnet tool install --global CycloneDX
 dotnet CycloneDX SonatypeSCA\SonatypeSCA.csproj -o SonatypeSCA\
+```
