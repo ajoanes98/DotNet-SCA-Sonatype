@@ -93,5 +93,5 @@ jobs:
          echo Sonatype-CLI.jar - https://download.sonatype.com/clm/scanner/latest.jar 
          curl --location 'https://download.sonatype.com/clm/scanner/latest.jar' > Sonatype-CLI.jar
          dir
-         java -jar Sonatype-CLI.jar -s https://iq.aplattel.ngrok.io/ -a admin:admin!23 -t release -i NET-SCA .
+         java -jar Sonatype-CLI.jar -s https://iq.aplattel.ngrok.io/ -a admin:admin!23 -t build -i NET-SCA .
     
